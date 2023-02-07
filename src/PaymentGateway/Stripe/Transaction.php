@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
+namespace PaymentGateway\Stripe;
+
 class Transaction
 {
-    private ?Customer $customer = null;
 
     //cannot do this with callable
     public function __construct(private float $amount, private string $description)

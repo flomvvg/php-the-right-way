@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-require_once '../Transaction.php';
-require_once '../PaymentProfile.php';
-require_once '../Customer.php';
+require_once '../PaymentGateway/Stripe/Transaction.php';
+require_once '../PaymentGateway/Paddle/Transaction.php';
+require_once '../PaymentGateway/Paddle/CustomerProfile.php';
 
-//Classes & Objects
-$transaction = new Transaction(100, 'Tx 1');
+use PaymentGateway\Paddle\{Transaction, CustomerProfile};
+use PaymentGateway\Stripe\Transaction as StripeTransaction;
 
-//nullsafe Operator (the "?")
-//discards the rest of the expression if something is null
-echo $transaction->getCustomer()?->getPaymentProfile()?->id;
+$paddleTransaction = new Transaction();
+$stripeTransaction = new StripeTransaction(10, 'Stripe Tx');
+$paddleCustomerProfile = new CustomerProfile();
+
+var_dump($paddleTransaction, $stripeTransaction, $paddleCustomerProfile);
