@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 class Transaction
 {
-    private float $amount = 15;
-    private string $description;
+    private ?Customer $customer = null;
 
-    public function __construct(float $amount, string $description)
+    //cannot do this with callable
+    public function __construct(private float $amount, private string $description)
     {
-        $this->amount = $amount;
-        $this->description = $description;
     }
 
     public function addTax(float $rate): self
@@ -35,5 +33,9 @@ class Transaction
     public function __destruct()
     {
         echo 'Destruct ' . $this->description . '<br>';
+    }
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
     }
 }
