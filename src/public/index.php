@@ -2,15 +2,11 @@
 
 declare(strict_types=1);
 
-require_once '../PaymentGateway/Stripe/Transaction.php';
-require_once '../PaymentGateway/Paddle/Transaction.php';
-require_once '../PaymentGateway/Paddle/CustomerProfile.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-use PaymentGateway\Paddle\{Transaction, CustomerProfile};
-use PaymentGateway\Stripe\Transaction as StripeTransaction;
+$id = new \Ramsey\Uuid\UuidFactory();
 
-$paddleTransaction = new Transaction();
-$stripeTransaction = new StripeTransaction(10, 'Stripe Tx');
-$paddleCustomerProfile = new CustomerProfile();
+echo $id->uuid4();
 
-var_dump($paddleTransaction, $stripeTransaction, $paddleCustomerProfile);
+$paddleTx = new \App\PaymentGateway\Paddle\Transaction();
+var_dump($paddleTx);
