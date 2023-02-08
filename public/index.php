@@ -2,18 +2,16 @@
 
 declare(strict_types=1);
 
-use \App\Toaster;
-use \App\ToasterPro;
+use App\{Checkbox, Radio, Text};
 
 require __DIR__ . '/../vendor/autoload.php';
 
-//If something (class/method etc.) has the final keyword, another class cannot extend it anymore
-//The final keyword prevents inheritance
+$fields = [
+    new Text('baseText'),
+    new Checkbox('baseCheckbox'),
+    new Radio('baseRadio'),
+];
 
-$toaster = new ToasterPro();
-
-$toaster->addSlice('bread');
-$toaster->addSlice('bread');
-$toaster->addSlice('bread');
-$toaster->addSlice('bread');
-$toaster->toastBagel();
+foreach ($fields as $field) {
+    echo $field->render() . '<br>';
+}
