@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
+use \App\PaymentGateway\Paddle\Transaction;
+use \App\Enums\Status;
+
 require __DIR__ . '/../vendor/autoload.php';
 
-$id = new \Ramsey\Uuid\UuidFactory();
+$tx = new Transaction();
 
-echo $id->uuid4();
+$tx->setStatus(Status::PAID);
 
-$paddleTx = new \App\PaymentGateway\Paddle\Transaction();
-var_dump($paddleTx);
+var_dump($tx);
