@@ -1,1 +1,3 @@
-src/vendor/
+vendor/
+composer.json
+.idea/
