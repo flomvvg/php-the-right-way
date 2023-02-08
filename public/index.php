@@ -2,16 +2,18 @@
 
 declare(strict_types=1);
 
-use \App\PaymentGateway\Paddle\Transaction;
+use \App\Toaster;
+use \App\ToasterPro;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-//encapsulation = access modifiers + setter & getter
-//zb. property to private and use getter/setter do access it
+//If something (class/method etc.) has the final keyword, another class cannot extend it anymore
+//The final keyword prevents inheritance
 
-$tx = new Transaction(25);
+$toaster = new ToasterPro();
 
-//abstraction: hide the implementation
-//this process function should not care what happens afterwards
-//the code should still work if changes are made somewhere else
-$tx->process();
+$toaster->addSlice('bread');
+$toaster->addSlice('bread');
+$toaster->addSlice('bread');
+$toaster->addSlice('bread');
+$toaster->toastBagel();

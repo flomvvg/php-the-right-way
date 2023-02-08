@@ -14,7 +14,7 @@ class Transaction
 
     public function process(): void
     {
-        echo "Processing $" . $this->amount . " Transaction";
+        echo "Processing $" . $this->getAmount() . " Transaction";
     }
 
     public function getAmount(): float
