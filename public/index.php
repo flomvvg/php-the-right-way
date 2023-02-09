@@ -5,6 +5,6 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$collector = new \App\DebtCollectionService();
+$invoice = new \App\Invoice();
 
-$collector->collectDebt(new \App\Rocky());
+var_dump($invoice);
