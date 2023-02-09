@@ -2,16 +2,9 @@
 
 declare(strict_types=1);
 
-use App\{Checkbox, Radio, Text};
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$fields = [
-    new Text('baseText'),
-    new Checkbox('baseCheckbox'),
-    new Radio('baseRadio'),
-];
+$collector = new \App\DebtCollectionService();
 
-foreach ($fields as $field) {
-    echo $field->render() . '<br>';
-}
+$collector->collectDebt(new \App\Rocky());
