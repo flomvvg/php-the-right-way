@@ -6,28 +6,18 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use App\Invoice;
 
-$invoice = new Invoice(25, 'name', 'description', '1234');
+$customer = new \App\Customer();
+$invoice = new Invoice($customer);
 
-//serialization is converting a value to a string form
-echo serialize(true);
-echo '<br>';
-echo serialize(1);
-echo '<br>';
-echo serialize('hello world');
-echo '<br>';
-echo serialize(2.5);
-echo '<br>';
-echo serialize([1,2,3]);
-echo '<br>';
-var_dump(unserialize(serialize(['a' => 1, 'b' => 2, 'c' => 3])));
-echo '<br>';
-echo '<br>';
-echo '<br>';
-echo '<br>';
-
-
-//unserialize creates a new object
-$str = serialize($invoice);
-$invoice2 = unserialize($str);
-
-var_dump($invoice2, $invoice === $invoice2);
+//code will continue after the first exception gets caught
+//multiple exceptions with "|" (pipe)
+try {
+    $invoice->process(25);
+} catch (\App\Exception\MissingBillingInfoException | \InvalidArgumentException $e) {
+    //$e is optional in PHP 8
+    echo $e->getMessage() . ' in File ' . $e->getFile() . ' at line: ' . $e->getLine() . '<br>';
+} finally {
+    //will always be executed
+    //in functions it can return values. If catch have return, and finally it will return the value from finally
+    echo 'Finally block';
+}
