@@ -4,29 +4,17 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use App\Invoice;
-use App\InvoiceCollection;
+use App\Controllers\Home;
+use App\Controllers\Invoice;
 
-foreach (new Invoice(25) as $key => $value) {
-    echo $key . ' = ' . $value . '<br>';
-}
+echo '<pre>';
+print_r($_SERVER);
+echo '</pre>';
 
-$invoiceCollection = new InvoiceCollection([new Invoice(25), new Invoice(15), new Invoice(50)]);
+$router = new App\Router();
 
-foreach ($invoiceCollection as $invoice) {
-    echo $invoice->id . ' - ' . $invoice->amount . '<br>';
-}
+$router->register('/', [Home::class, 'index'])
+    ->register('/invoices', [Invoice::class, 'index'])
+    ->register('/invoices/create', [Invoice::class, 'create']);
 
-echo '<br>';
-echo '<br>';
-echo '<br>';
-
-foo($invoiceCollection);
-//iterable can be used to type hint iterable values
-function foo(iterable $iterable) {
-    foreach ($iterable as $k => $v) {
-        //...
-        var_dump($k, $v);
-        echo '<br>';
-    }
-}
+echo $router->resolve($_SERVER['REQUEST_URI']);
